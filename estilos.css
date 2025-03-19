@@ -37,9 +37,15 @@ button:hover {
     background-color: #E63946;
 }
 
-.green, .red, .yellow {
+.morado {
+    background-color: #6F42C1;
+}
+
+
+.green, .red, .yellow, .morado {
     width: 100px;
 }
+
 h2 {
     font-size: 80px;
     margin: 0px;

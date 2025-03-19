@@ -10,28 +10,30 @@
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $mensajeConfirmacion = "";
-
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $id = $_POST["id"];
         $nombre = $_POST["evento"];
         $fecha = $_POST["fecha"];
         $hora = $_POST["hora"];
         $ubicacion = $_POST["ubicacion"];
         $descripcion = $_POST["descripcion"];
 
-        $sql = "INSERT INTO evento (nombre, fecha, hora, lugar, descripcion) VALUES ('$nombre', '$fecha', '$hora', '$ubicacion', '$descripcion')";   
+        $sql = "UPDATE evento SET 
+                nombre = '$nombre', 
+                fecha = '$fecha', 
+                hora = '$hora', 
+                lugar = '$ubicacion', 
+                descripcion = '$descripcion' 
+                WHERE id = $id";
         
         if ($conn->query($sql) === TRUE) {
-            $mensajeConfirmacion = "Información guardada correctamente";
-            echo $mensajeConfirmacion;
+            echo "Evento actualizado correctamente";
         } else {
-            $mensajeConfirmacion = "Error al guardar la información: " . $conn->error;
-            echo $mensajeConfirmacion;
-        }     
+            echo "Error al actualizar evento: " . $conn->error;
+        }
+    } else {
+        echo "Método no permitido";
     }
-    else {
-        $mensajeConfirmacion = "Error al guardar la información";
-        echo $mensajeConfirmacion;
-    }
-
+    
+    $conn->close();
 ?>

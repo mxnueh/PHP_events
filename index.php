@@ -10,12 +10,12 @@
     <link rel="stylesheet" href="estilos.css">    
 </head>
 <body>
-
     <h2>Administrador de Eventos</h2>
     <div class="container">
         <button class="green" onclick="window.location.href='agregar.php';">Agregar</button>
-        <button class = "yellow" onclick="window.location.href='editar.php';">Editar</button>
-        <button class = "red" onclick="window.location.href='eliminar.php';">Eliminar</button>
+        <button class="yellow" onclick="window.location.href='editar.php';">Editar</button>
+        <button class="red" onclick="window.location.href='eliminar.php';">Eliminar</button>
+        <button class="morado" onclick="window.location.href='mostrar.php';">Mostrar</button>
     </div>
     <br>
 </body>
