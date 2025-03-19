@@ -21,7 +21,7 @@
         if($result->num_rows > 0) {
             $evento = $result->fetch_assoc();
         } else {
-            echo "No se encontró el evento.";
+            echo "<h2>No se encontró el evento.</h2>";
             exit;
         }
     } else {
