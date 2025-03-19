@@ -19,13 +19,11 @@
         $ubicacion = $_POST["ubicacion"];
         $descripcion = $_POST["descripcion"];
 
-        $sql = "INSERT INTO evento (nombre, fecha, hora, lugar, descripcion) VALUES ('$nombre', '$fecha', '$hora', '$ubicacion', '$descripcion')";
-
-        if ($conn->query($sql) === TRUE) {
-            $mensajeConfirmacion = "El mensaje se envió correctamente.";
-        } else {
-            $mensajeConfirmacion = "Error al enviar el mensaje: " . $conn->error;
-        }
+        $sql = "INSERT INTO evento (nombre, fecha, hora, lugar, descripcion) VALUES ('$nombre', '$fecha', '$hora', '$ubicacion', '$descripcion')";        
+    }
+    else {
+        $mensajeConfirmacion = "Error al guardar la información";
+        echo $mensajeConfirmacion;
     }
 
 ?>
