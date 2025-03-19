@@ -47,7 +47,7 @@ h2 {
 
 form {
     width: 300px;
-    margin: auto;
+    margin: 50px auto;
     padding: 20px;
     background: #f4f4f4;
     border-radius: 10px;
@@ -60,6 +60,7 @@ input, textarea {
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    outline: none;
 }
 
 label {

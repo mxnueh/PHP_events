@@ -9,46 +9,24 @@
 </head>
 <body>
     
-    <form action="" method = "POST" >
-        <input type="text">
-        <label for=""></label>
+<form action="procesar.php" method="POST">
+    <label for="evento">Nombre del evento:</label>
+    <input type="text" id="evento" name="evento" required>
 
-        <input type="date">
-        <label for=""></label>
+    <label for="fecha">Fecha:</label>
+    <input type="date" id="fecha" name="fecha" required>
 
-        <input type="time">
-        <label for=""></label>
+    <label for="hora">Hora:</label>
+    <input type="time" id="hora" name="hora" required>
 
-        <input type="text">
-        <label for=""></label>
+    <label for="ubicacion">Ubicación:</label>
+    <input type="text" id="ubicacion" name="ubicacion" required>
 
-        <textarea name="" id=""></textarea>
-    </form>
+    <label for="descripcion">Descripción:</label>
+    <textarea id="descripcion" name="descripcion" required></textarea>
 
-        
-    <?php
-
-    $mensajeConfirmacion = "";
-
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $nombre = $_POST["nombre"];
-        $email = $_POST["email"];
-        $mensaje = $_POST["mensaje"];
-
-        $nombre = $conn->real_escape_string($nombre);
-        $email = $conn->real_escape_string($email);
-        $mensaje = $conn->real_escape_string($mensaje);
-
-        $sql = "INSERT INTO nombre (nombre, email, mensaje) VALUES ('$nombre', '$email', '$mensaje')";
-
-        if ($conn->query($sql) === TRUE) {
-            $mensajeConfirmacion = "El mensaje se envió correctamente.";
-        } else {
-            $mensajeConfirmacion = "Error al enviar el mensaje: " . $conn->error;
-        }
-    }
-
-    ?>
+    <input type="submit" value="Guardar evento"></input>
+</form>
 </body>
 </html>
 
