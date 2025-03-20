@@ -10,6 +10,16 @@
         die("Connection failed: " . $conn->connect_error);
     }
 
+    // Variable para mensajes de confirmación
+    $mensaje = "";
+    $tipo_mensaje = "";
+
+    // Comprobar si hay un mensaje de confirmación pasado por GET
+    if(isset($_GET['mensaje']) && isset($_GET['tipo'])) {
+        $mensaje = $_GET['mensaje'];
+        $tipo_mensaje = $_GET['tipo'];
+    }
+
     // Verificar si se ha enviado un ID
     if(isset($_GET['id']) && !empty($_GET['id'])) {
         $id = $_GET['id'];
@@ -28,6 +38,8 @@
         echo "ID de evento no especificado.";
         exit;
     }
+
+    
 ?>
 
 <!DOCTYPE html>
@@ -37,9 +49,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Evento</title>
     <link rel="stylesheet" href="estilos.css">
+    <style>
+        .btn-agregar {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 16px;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        .btn-agregar:hover {
+            background-color: #007bff;
+        }
+        .mensaje {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            color: white;
+        }
+        .exito {
+            background-color: #4CAF50;
+        }
+        .error {
+            background-color: #f44336;
+        }
+    </style>
 </head>
 <body>
     <h2>Editar Evento</h2>
+    
+    <?php
+    // Mostrar mensaje de confirmación si existe
+    if(!empty($mensaje)) {
+        $clase = ($tipo_mensaje == 'exito') ? 'exito' : 'error';
+        echo "<div class='mensaje $clase'>$mensaje</div>";
+    }
+    ?>
     
     <form id="editar-form" action="actualizar.php" method="POST">
         <input type="hidden" name="id" value="<?php echo $id; ?>">
@@ -62,42 +111,8 @@
         <input type="submit" value="Actualizar evento">
     </form>
     
-    <p><a href="mostrar.php">Volver a la lista</a></p>
-    
-    <div id="mensaje-confirmacion" style="display: none;"></div>
-
-    <script>
-    document.getElementById('editar-form').addEventListener('submit', function(event) {
-        event.preventDefault(); 
-        
-        const formData = new FormData(this);
-        
-        fetch('actualizar.php', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.text())
-        .then(data => {
-            const mensajeDiv = document.getElementById('mensaje-confirmacion');
-            mensajeDiv.style.display = 'block';
-            mensajeDiv.textContent = data;
-            
-            if(data.includes('correctamente')) {
-                mensajeDiv.style.backgroundColor = '#4CAF50';
-                setTimeout(function() {
-                    window.location.href = 'mostrar.php';
-                }, 2000);
-            } else {
-                mensajeDiv.style.backgroundColor = '#f44336';
-            }
-        })
-        .catch(error => {
-            const mensajeDiv = document.getElementById('mensaje-confirmacion');
-            mensajeDiv.style.display = 'block';
-            mensajeDiv.textContent = 'Error al actualizar la información: ' + error;
-            mensajeDiv.style.backgroundColor = '#f44336';
-        });
-    });
-    </script>
+    <div>
+        <a href="index.php" class="btn-agregar">Volver a la lista</a>
+    </div>
 </body>
 </html>
