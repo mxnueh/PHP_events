@@ -6,8 +6,7 @@
     <title>Agregar registro</title>
     <link rel="stylesheet" href="estilos.css">    
     <style>
-        #mensaje-confirmacion {
-            display: none;
+        .mensaje-confirmacion {
             background-color: #4CAF50;
             color: white;
             padding: 15px;
@@ -19,10 +18,31 @@
         .error {
             background-color: #f44336;
         }
+        
+        .btn-volver {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 16px;
+            margin-top: 5px;
+        }
     </style>
 </head>
 <body>
     
+<?php
+// Mostrar mensaje de confirmación si existe
+if(isset($_GET['mensaje'])) {
+    $clase = (isset($_GET['error']) && $_GET['error'] == 1) ? 'mensaje-confirmacion error' : 'mensaje-confirmacion';
+    echo "<div class='{$clase}'>{$_GET['mensaje']}</div>";
+}
+?>
+
 <form id="evento-form" action="procesar.php" method="POST">
     <label for="evento">Nombre del evento:</label>
     <input type="text" id="evento" name="evento" required>
@@ -41,38 +61,8 @@
 
     <input type="submit" value="Guardar evento">
 </form>
+<a href="index.php" class="btn-volver">Volver a la lista</a>
 
-<div id="mensaje-confirmacion"></div>
-
-<script>
-document.getElementById('evento-form').addEventListener('submit', function(event) {
-    event.preventDefault(); 
-    
-    const formData = new FormData(this);
-    
-    fetch('procesar.php', {
-        method: 'POST',
-        body: formData
-    })
-    
-
-    .then(response => response.text())
-    .then(data => {
-        const mensajeDiv = document.getElementById('mensaje-confirmacion');
-        mensajeDiv.style.display = 'block';
-        mensajeDiv.textContent = 'Información guardada correctamente';
-        mensajeDiv.classList.remove('error');
-        
-        document.getElementById('evento-form').reset();
-    })
-    .catch(error => {
-        const mensajeDiv = document.getElementById('mensaje-confirmacion');
-        mensajeDiv.style.display = 'block';
-        mensajeDiv.textContent = 'Error al guardar la información: ' + error;
-        mensajeDiv.classList.add('error');
-    });
-});
-</script>
 
 </body>
 </html>
