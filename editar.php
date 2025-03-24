@@ -14,7 +14,6 @@
     $mensaje = "";
     $tipo_mensaje = "";
 
-    // Comprobar si hay un mensaje de confirmación pasado por GET
     if(isset($_GET['mensaje']) && isset($_GET['tipo'])) {
         $mensaje = $_GET['mensaje'];
         $tipo_mensaje = $_GET['tipo'];
@@ -24,7 +23,6 @@
     if(isset($_GET['id']) && !empty($_GET['id'])) {
         $id = $_GET['id'];
         
-        // Obtener los datos del evento
         $sql = "SELECT nombre, fecha, hora, lugar, descripcion FROM evento WHERE id = $id";
         $result = $conn->query($sql);
         
