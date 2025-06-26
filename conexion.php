@@ -2,7 +2,7 @@
 $servidor = "localhost";  
 $usuario = "root";       
 $clave = "";             
-$base_de_datos = "eventos";  
+$base_de_datos = "eventos_db";  
 
 $conexion = new mysqli($servidor, $usuario, $clave, $base_de_datos);
 
